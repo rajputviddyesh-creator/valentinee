@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>For Ritika 💖</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: #ffd6e8;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    /* MAIN CARD */
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      width: 90%;
+      max-width: 360px;
+      position: relative;
+      z-index: 10;
+    }
+
+    img {
+      width: 120px;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      color: #ff4d8d;
+      font-size: 22px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    button {
+      flex: 1;
+      padding: 14px;
+      font-size: 18px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+    }
+
+    #yes {
+      background: #ff4d8d;
+      color: white;
+    }
+
+    #no {
+      background: #ddd;
+    }
+
+    #msg {
+      margin-top: 12px;
+      color: #666;
+      min-height: 20px;
+    }
+
+    /* HEARTS */
+    .heart {
+      position: fixed;
+      bottom: -20px;
+      font-size: 20px;
+      animation: float 6s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes float {
+      to { transform: translateY(-120vh); }
+    }
+
+    /* YAY SCREEN (HIDDEN BY DEFAULT) */
+    #yay {
+      display: none;          /* ✅ only hidden */
+      position: fixed;
+      inset: 0;
+      background: #ffd6e8;
+      z-index: 20;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- AUDIO -->
+<audio id="song">
+  <source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<!-- MAIN PAGE -->
+<div class="card" id="card">
+  <img src="https://i.pinimg.com/originals/9a/25/2c/9a252c6c3e4d5a6d6b8f2d0c0a4f5fcb.png">
+  <h1>
+    Ritika 💕<br>
+    Will you be my Valentine,<br>
+    gunguniiiiiii?
+  </h1>
+
+  <div class="buttons">
+    <button id="yes">Yes 💕</button>
+    <button id="no">No 🙃</button>
+  </div>
+
+  <div id="msg"></div>
+</div>
+
+<!-- YAY PAGE -->
+<div id="yay">
+  <h1 style="color:#ff4d8d;">
+    YAYYYY 💖🐱💖<br><br>
+    Happy Valentine’s Day Ritika 🌸<br>
+    <span style="font-size:18px;color:#555;">
+      I knew it, gunguniiiiiii 😌
+    </span>
+  </h1>
+</div>
+
+<script>
+  /* HEARTS */
+  for (let i = 0; i < 12; i++) {
+    let h = document.createElement("div");
+    h.className = "heart";
+    h.innerText = "💖";
+    h.style.left = Math.random() * 100 + "vw";
+    h.style.animationDuration = (4 + Math.random() * 4) + "s";
+    document.body.appendChild(h);
+  }
+
+  const no = document.getElementById("no");
+  const msg = document.getElementById("msg");
+
+  no.onmouseover = () => {
+    no.style.transform =
+      `translate(${Math.random()*120-60}px,${Math.random()*80-40}px)`;
+    msg.innerText = "Nice try 😏";
+  };
+
+  document.getElementById("yes").onclick = () => {
+    document.getElementById("song").play();
+
+    // switch pages safely
+    document.getElementById("card").style.display = "none";
+    document.getElementById("yay").style.display = "flex";
+  };
+</script>
+
+</body>
+</html>
