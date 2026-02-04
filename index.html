@@ -18,29 +18,54 @@
     text-align: center;
   }
 
+  /* FLOATING HEARTS */
+  .heart {
+    position: fixed;
+    bottom: -40px;
+    font-size: 24px;
+    color: #b00020;
+    opacity: 0.9;
+    animation: floatUp linear infinite;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  @keyframes floatUp {
+    from {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateY(-120vh);
+      opacity: 0;
+    }
+  }
+
   .box {
     position: relative;
     width: 90vw;
     max-width: 360px;
-    height: 280px;
+    height: 300px;
+    z-index: 2;
   }
 
   h1 {
     color: #b00020;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
+    font-size: 22px;
   }
 
   #msg {
-    font-size: 14px;
+    font-size: 13px;
     color: #b00020;
-    min-height: 20px;
+    min-height: 18px;
   }
 
   button {
-    padding: 10px 18px; /* SMALLER BUTTON */
-    font-size: 14px;
+    padding: 8px 14px;   /* SMALL BUTTON */
+    font-size: 13px;     /* SMALL TEXT */
     border: none;
-    border-radius: 25px;
+    border-radius: 20px;
     cursor: pointer;
     position: absolute;
     user-select: none;
@@ -52,7 +77,7 @@
     left: 50%;
     bottom: 20px;
     transform: translateX(-50%);
-    z-index: 2; /* ALWAYS CLICKABLE */
+    z-index: 3;
   }
 
   #no {
@@ -67,6 +92,14 @@
 
 <body>
 
+<!-- HEARTS -->
+<div class="heart" style="left:10%; animation-duration:10s;">❤️</div>
+<div class="heart" style="left:25%; animation-duration:12s;">❤️</div>
+<div class="heart" style="left:40%; animation-duration:9s;">❤️</div>
+<div class="heart" style="left:55%; animation-duration:11s;">❤️</div>
+<div class="heart" style="left:70%; animation-duration:10s;">❤️</div>
+<div class="heart" style="left:85%; animation-duration:13s;">❤️</div>
+
 <div class="box" id="box">
   <h1>Ritika, will you be my Valentine? 💖</h1>
   <div id="msg"></div>
@@ -77,52 +110,42 @@
 
 <script>
   const noBtn = document.getElementById("no");
-  const yesBtn = document.getElementById("yes");
   const box = document.getElementById("box");
   const msg = document.getElementById("msg");
 
   const sadTexts = [
     "Are you sure? 🥺",
     "Think again 😔",
-    "That hurts a little 💔",
+    "That hurts 💔",
     "Pleaseee 🥹",
-    "Don’t do this to me 😭"
+    "Don’t do this 😭"
   ];
 
   function moveNoButton() {
     const boxRect = box.getBoundingClientRect();
     const btnRect = noBtn.getBoundingClientRect();
-    const padding = 15;
+    const padding = 20;
 
     const maxX = boxRect.width - btnRect.width - padding;
     const maxY = boxRect.height - btnRect.height - padding;
 
-    const randomX = Math.random() * maxX;
-    const randomY = Math.random() * maxY;
+    noBtn.style.left = Math.random() * maxX + "px";
+    noBtn.style.top = Math.random() * maxY + "px";
 
-    noBtn.style.left = randomX + "px";
-    noBtn.style.top = randomY + "px";
-
-    // show sad text
     msg.innerText = sadTexts[Math.floor(Math.random() * sadTexts.length)];
   }
 
-  // Desktop
   noBtn.addEventListener("mouseenter", moveNoButton);
   noBtn.addEventListener("mousemove", moveNoButton);
-
-  // Mobile
   noBtn.addEventListener("touchstart", (e) => {
     e.preventDefault();
     moveNoButton();
   });
 
-  // YES CLICK → go to next page
-  yesBtn.addEventListener("click", () => {
+  document.getElementById("yes").addEventListener("click", () => {
     window.location.href = "yes.html";
   });
 
-  // initial position
   moveNoButton();
 </script>
 
