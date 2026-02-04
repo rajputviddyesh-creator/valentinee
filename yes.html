@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>YAY 💖</title>
+<title>Happy Valentine 💖</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -15,11 +15,26 @@
     align-items: center;
     font-family: "Poppins", Arial, sans-serif;
     text-align: center;
+    overflow: hidden;
+  }
+
+  .heart {
+    position: fixed;
+    bottom: -40px;
+    font-size: 28px;
+    color: #b00020;
+    animation: floatUp linear infinite;
+    pointer-events: none;
+  }
+
+  @keyframes floatUp {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(-120vh); opacity: 0; }
   }
 
   h1 {
     color: #b00020;
-    font-size: 34px;
+    font-size: 32px;
   }
 
   p {
@@ -31,16 +46,21 @@
 <body>
 
 <div>
-  <h1>YAY 💖</h1>
-  <p>Gunguniiii, you just made me the happiest 🥹</p>
+  <h1>Happy Valentine’s Day 💖</h1>
+  <p>Gunguniiii, you make my world brighter 🥹</p>
 </div>
+
+<!-- HEARTS -->
+<div class="heart" style="left:15%; animation-duration:9s;">❤️</div>
+<div class="heart" style="left:35%; animation-duration:11s;">❤️</div>
+<div class="heart" style="left:55%; animation-duration:10s;">❤️</div>
+<div class="heart" style="left:75%; animation-duration:12s;">❤️</div>
 
 <audio id="music">
   <source src="song.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-  // music plays after YES click (browser-safe)
   window.addEventListener("load", () => {
     const music = document.getElementById("music");
     music.play().catch(() => {});
